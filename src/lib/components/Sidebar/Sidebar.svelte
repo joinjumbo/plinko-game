@@ -121,14 +121,15 @@
 
 <!-- bet controls -->
 <div class="flex flex-col gap-5 rounded-lg bg-[#333742] p-3 lg:max-w-80">
-  <div class="flex gap-1 rounded-lg bg-slate-900 p-1">
+  <div class="flex gap-1 rounded-lg border-2 border-[#3D424E] bg-[#2C303B] p-1">
     {#each betModes as { value, label }}
       <button
         disabled={autoBetInterval !== null}
         onclick={() => (betMode = value)}
         class={twMerge(
           'flex-1 rounded-lg py-2 text-sm font-medium text-white transition hover:not-disabled:bg-slate-600 active:not-disabled:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
-          betMode === value && 'bg-slate-600',
+          // betMode === value && 'bg-slate-600',
+          betMode === value && 'bg-[#24BB3C] text-black',
         )}
       >
         {label}
@@ -192,7 +193,8 @@
           onclick={handleBetClick}
           disabled={isDropBallDisabled}
           class={twMerge(
-            'w-1/2 touch-manipulation rounded-md bg-green-500 py-4 text-lg font-semibold text-slate-900 transition-colors hover:bg-green-400 active:bg-green-600 disabled:bg-neutral-600 disabled:text-neutral-400',
+            'w-1/2 touch-manipulation rounded-md py-4 text-lg font-semibold text-slate-900 transition-colors',
+            'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
             autoBetInterval !== null && 'bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600',
           )}
         >
