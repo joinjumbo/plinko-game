@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <SettingsWindow />
+  <!-- <SettingsWindow /> -->
   <LiveStatsWindow />
 
   <!-- <footer class="px-5 pt-16 pb-4">

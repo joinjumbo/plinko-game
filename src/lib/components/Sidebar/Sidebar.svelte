@@ -117,7 +117,6 @@
     { value: RiskLevel.MEDIUM, label: 'Medium' },
     { value: RiskLevel.HIGH, label: 'High' },
   ];
-  const rowCounts = rowCountOptions.map((value) => ({ value, label: value.toString() }));
 </script>
 
 <div class="flex flex-col gap-5 bg-slate-700 p-3 lg:max-w-80">
@@ -191,16 +190,6 @@
       id="riskLevel"
       bind:value={$riskLevel}
       items={riskLevels}
-      disabled={hasOutstandingBalls || autoBetInterval !== null}
-    />
-  </div>
-
-  <div>
-    <label for="rowCount" class="text-sm font-medium text-slate-300">Rows</label>
-    <Select
-      id="rowCount"
-      bind:value={$rowCount}
-      items={rowCounts}
       disabled={hasOutstandingBalls || autoBetInterval !== null}
     />
   </div>
