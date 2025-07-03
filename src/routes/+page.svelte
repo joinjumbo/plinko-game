@@ -39,7 +39,7 @@
   <SettingsWindow />
   <LiveStatsWindow />
 
-  <footer class="px-5 pt-16 pb-4">
+  <!-- <footer class="px-5 pt-16 pb-4">
     <div class="mx-auto max-w-[40rem]">
       <div aria-hidden="true" class="h-[1px] bg-slate-700"></div>
       <div class="flex items-center justify-between p-2">
@@ -65,7 +65,7 @@
         </a>
       </div>
     </div>
-  </footer>
+  </footer> -->
 </div>
 
 <style lang="postcss">
