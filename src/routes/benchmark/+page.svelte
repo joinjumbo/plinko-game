@@ -52,7 +52,7 @@
     </select>
   </div>
 
-  <button onclick={dropSingleBall} class="bg-cyan-100 p-2">Drop Ball</button>
+  <button onclick={dropSingleBall} class="bg-cyan-100 p-2">Bet</button>
 
   {#if dropBallInterval === null}
     <button onclick={startDropBallInterval} class="bg-cyan-100 p-2">Start Auto Drop</button>

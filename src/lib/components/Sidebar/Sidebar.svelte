@@ -119,14 +119,15 @@
   ];
 </script>
 
-<div class="flex flex-col gap-5 bg-slate-700 p-3 lg:max-w-80">
-  <div class="flex gap-1 rounded-full bg-slate-900 p-1">
+<!-- bet controls -->
+<div class="flex flex-col gap-5 rounded-lg bg-[#333742] p-3 lg:max-w-80">
+  <div class="flex gap-1 rounded-lg bg-slate-900 p-1">
     {#each betModes as { value, label }}
       <button
         disabled={autoBetInterval !== null}
         onclick={() => (betMode = value)}
         class={twMerge(
-          'flex-1 rounded-full py-2 text-sm font-medium text-white transition hover:not-disabled:bg-slate-600 active:not-disabled:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
+          'flex-1 rounded-lg py-2 text-sm font-medium text-white transition hover:not-disabled:bg-slate-600 active:not-disabled:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
           betMode === value && 'bg-slate-600',
         )}
       >
@@ -243,7 +244,7 @@
     )}
   >
     {#if betMode === BetMode.MANUAL}
-      Drop Ball
+      Bet
     {:else if autoBetInterval === null}
       Start Autobet
     {:else}
@@ -255,7 +256,7 @@
     <div class="flex items-center gap-4 border-t border-slate-600 pt-3">
       <Tooltip.Provider delayDuration={0} disableCloseOnTriggerClick>
         <!-- Settings Button -->
-        <Tooltip.Root>
+        <!-- <Tooltip.Root>
           <Tooltip.Trigger
             onclick={() => ($isGameSettingsOpen = !$isGameSettingsOpen)}
             class={twMerge(
@@ -281,10 +282,10 @@
               {/if}
             {/snippet}
           </Tooltip.Content>
-        </Tooltip.Root>
+        </Tooltip.Root> -->
 
         <!-- Live Stats Button -->
-        <Tooltip.Root>
+        <!-- <Tooltip.Root>
           <Tooltip.Trigger
             onclick={() => ($isLiveStatsOpen = !$isLiveStatsOpen)}
             class={twMerge(
@@ -310,7 +311,7 @@
               {/if}
             {/snippet}
           </Tooltip.Content>
-        </Tooltip.Root>
+        </Tooltip.Root> -->
       </Tooltip.Provider>
     </div>
   </div>
