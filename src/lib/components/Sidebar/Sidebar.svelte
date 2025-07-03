@@ -147,9 +147,9 @@
   </div>
 
   <div class="relative">
-    <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label>
-    <div class="flex">
-      <div class="relative flex-1">
+    <!-- <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label> -->
+    <div class="flex items-end gap-2">
+      <div class="relative w-1/2">
         <input
           id="betAmount"
           value={$betAmount}
@@ -160,14 +160,16 @@
           step="0.01"
           inputmode="decimal"
           class={twMerge(
-            'w-full rounded-l-md border-2 border-slate-600 bg-slate-900 py-2 pr-2 pl-7 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden  disabled:cursor-not-allowed disabled:opacity-50',
+            'w-full rounded-lg border-2 border-slate-600 bg-slate-900 py-4 pr-2 pl-7 text-lg text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden  disabled:cursor-not-allowed disabled:opacity-50',
             (isBetAmountNegative || isBetExceedBalance) &&
               'border-red-500 hover:not-disabled:border-red-400 focus:border-red-400',
           )}
         />
-        <div class="absolute top-2 left-3 text-slate-500 select-none" aria-hidden="true">$</div>
+        <div class="absolute top-4 left-3 text-lg text-slate-500 select-none" aria-hidden="true">
+          $
+        </div>
       </div>
-      <button
+      <!-- <button
         disabled={autoBetInterval !== null}
         onclick={() => {
           $betAmount = parseFloat(($betAmount / 2).toFixed(2));
@@ -184,7 +186,19 @@
         class="relative touch-manipulation rounded-r-md bg-slate-600 px-4 text-sm font-bold text-white transition-colors after:absolute after:left-0 after:inline-block after:h-1/2 after:w-[2px] after:bg-slate-800 after:content-[''] hover:not-disabled:bg-slate-500 active:not-disabled:bg-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
       >
         2×
-      </button>
+      </button> -->
+      {#if betMode === BetMode.MANUAL}
+        <button
+          onclick={handleBetClick}
+          disabled={isDropBallDisabled}
+          class={twMerge(
+            'w-1/2 touch-manipulation rounded-md bg-green-500 py-4 text-lg font-semibold text-slate-900 transition-colors hover:bg-green-400 active:bg-green-600 disabled:bg-neutral-600 disabled:text-neutral-400',
+            autoBetInterval !== null && 'bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600',
+          )}
+        >
+          Bet
+        </button>
+      {/if}
     </div>
     {#if isBetAmountNegative}
       <p class="absolute text-xs leading-5 text-red-400">
@@ -233,21 +247,4 @@
       {/if}
     </div>
   {/if}
-
-  <button
-    onclick={handleBetClick}
-    disabled={isDropBallDisabled}
-    class={twMerge(
-      'touch-manipulation rounded-md bg-green-500 py-3 font-semibold text-slate-900 transition-colors hover:bg-green-400 active:bg-green-600 disabled:bg-neutral-600 disabled:text-neutral-400',
-      autoBetInterval !== null && 'bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600',
-    )}
-  >
-    {#if betMode === BetMode.MANUAL}
-      Bet
-    {:else if autoBetInterval === null}
-      Start Autobet
-    {:else}
-      Stop Autobet
-    {/if}
-  </button>
 </div>
