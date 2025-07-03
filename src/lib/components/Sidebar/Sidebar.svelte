@@ -136,6 +136,16 @@
     {/each}
   </div>
 
+  <div>
+    <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
+    <Select
+      id="riskLevel"
+      bind:value={$riskLevel}
+      items={riskLevels}
+      disabled={hasOutstandingBalls || autoBetInterval !== null}
+    />
+  </div>
+
   <div class="relative">
     <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label>
     <div class="flex">
@@ -184,17 +194,6 @@
       <p class="absolute text-xs leading-5 text-red-400">Can't bet more than your balance!</p>
     {/if}
   </div>
-
-  <div>
-    <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk</label>
-    <Select
-      id="riskLevel"
-      bind:value={$riskLevel}
-      items={riskLevels}
-      disabled={hasOutstandingBalls || autoBetInterval !== null}
-    />
-  </div>
-
   {#if betMode === BetMode.AUTO}
     <div>
       <div class="flex items-center gap-1">
