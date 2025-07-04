@@ -25,16 +25,18 @@
     </div>
   </nav>
 
-  <div class="flex-1 px-5">
+  <div class="flex-1 px-5 pb-32">
     <div class="mx-auto mt-5 max-w-xl min-w-[300px] drop-shadow-xl md:mt-10 lg:max-w-7xl">
       <div class="flex flex-col-reverse overflow-hidden rounded-lg lg:w-full lg:flex-row">
-        <Sidebar />
         <div class="flex-1">
           <Plinko />
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Place Sidebar as sticky footer here -->
+  <Sidebar />
 
   <!-- <SettingsWindow /> -->
   <LiveStatsWindow />
