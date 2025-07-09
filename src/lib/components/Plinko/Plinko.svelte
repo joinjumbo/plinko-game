@@ -35,7 +35,7 @@
     </div>
     <BinsRow />
     <!-- jugaad positioning -->
-    <div class="mt-28 flex justify-center">
+    <div class="mt-20 flex justify-center">
       <LastWins />
     </div>
   </div>
