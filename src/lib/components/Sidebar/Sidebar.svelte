@@ -133,7 +133,7 @@
         class={twMerge(
           'flex-1 rounded-lg py-2 text-sm font-medium text-white transition hover:not-disabled:bg-slate-600 active:not-disabled:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
           // betMode === value && 'bg-slate-600',
-          betMode === value && 'bg-[#24BB3C] text-black',
+          betMode === value && 'bg-[#1ACB37] text-black',
         )}
       >
         {label}
@@ -250,10 +250,10 @@
         class={twMerge(
           'w-1/2 touch-manipulation rounded-md py-4 text-lg font-semibold text-slate-900 transition-colors',
           betMode === BetMode.MANUAL
-            ? 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400'
+            ? 'bg-[#1ACB37] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400'
             : autoBetInterval !== null
-              ? 'bg-red-500 hover:bg-red-400 active:bg-red-600'
-              : 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
+              ? 'bg-[#FF6565] hover:bg-[#FF7575] active:bg-[#FF5555]'
+              : 'bg-[#1ACB37] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
         )}
       >
         {#if betMode === BetMode.MANUAL}
