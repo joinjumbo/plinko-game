@@ -34,8 +34,9 @@
       </canvas>
     </div>
     <BinsRow />
-  </div>
-  <div class="absolute top-1/2 right-[5%] -translate-y-1/2">
-    <LastWins />
+    <!-- jugaad positioning -->
+    <div class="mt-28 flex justify-center">
+      <LastWins />
+    </div>
   </div>
 </div>

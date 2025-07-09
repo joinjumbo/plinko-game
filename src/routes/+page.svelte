@@ -19,15 +19,15 @@
   <nav class="sticky top-0 z-10 w-full px-5 drop-shadow-lg">
     <div class="mx-auto flex h-14 max-w-7xl items-center justify-between">
       <!-- <img src={logo} alt="logo" class="h-6 sm:h-7" /> -->
-      <div class="flex items-center justify-between w-full">
+      <div class="flex w-full items-center justify-between">
         <img src={logo} alt="logo" class="h-6 sm:h-7" />
         <Balance />
       </div>
     </div>
   </nav>
 
-  <div class="flex-1 px-2 pb-32">
-    <div class="mx-auto mt-3 w-full max-w-none drop-shadow-xl">
+  <div class="flex-1 px-2 pt-8 pb-32">
+    <div class="mx-auto mt-8 w-full max-w-none drop-shadow-xl">
       <div class="flex flex-col-reverse overflow-hidden">
         <div class="flex-1">
           <Plinko />
