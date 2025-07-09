@@ -121,10 +121,10 @@
 
 <!-- bet controls -->
 <div
-  class="fixed right-0 bottom-0 left-0 z-50 mx-2 mb-4 flex
-  w-full flex-col gap-5 rounded-lg bg-[#333742] p-4 shadow-xl
-  sm:right-auto sm:left-1/2 sm:mx-4 sm:w-auto sm:max-w-[600px] sm:-translate-x-1/2
-  lg:static lg:left-auto lg:mx-0 lg:mb-0 lg:translate-x-0 lg:rounded-lg lg:bg-[#333742] lg:p-3 lg:shadow-none"
+  class="fixed bottom-0 left-0 right-0 z-50 mx-2 mb-2 flex
+  w-auto flex-col gap-5 rounded-lg bg-[#333742] p-4 shadow-xl
+  sm:left-1/2 sm:right-auto sm:mx-4 sm:w-auto sm:max-w-[600px] sm:-translate-x-1/2
+  lg:static lg:left-auto lg:mx-0 lg:mb-0 lg:translate-x-0 lg:rounded-lg lg:bg-[#333742] lg:p-4 lg:shadow-none"
   style="box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);"
 >
   <div class="flex gap-1 rounded-lg border-2 border-[#3D424E] bg-[#2C303B] p-1">
@@ -173,7 +173,7 @@
           )}
         />
         <div class="absolute top-4 left-3 text-lg text-slate-500 select-none" aria-hidden="true">
-          $
+          ₹
         </div>
       </div>
       <!-- <button

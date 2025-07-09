@@ -18,8 +18,9 @@
 <div class="relative flex min-h-dvh w-full flex-col">
   <nav class="sticky top-0 z-10 w-full px-5 drop-shadow-lg">
     <div class="mx-auto flex h-14 max-w-7xl items-center justify-between">
-      <img src={logo} alt="logo" class="h-6 sm:h-7" />
-      <div class="mx-auto">
+      <!-- <img src={logo} alt="logo" class="h-6 sm:h-7" /> -->
+      <div class="flex items-center justify-between w-full">
+        <img src={logo} alt="logo" class="h-6 sm:h-7" />
         <Balance />
       </div>
     </div>

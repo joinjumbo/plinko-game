@@ -17,7 +17,7 @@
   <div
     class="flex gap-2 bg-slate-900 px-3 py-2 text-sm font-semibold text-white tabular-nums sm:text-base"
   >
-    <span class="text-gray-500 select-none">$</span>
+    <span class="text-gray-500 select-none">₹</span>
     <span class="min-w-16 text-right">
       {balanceFormatted}
     </span>
@@ -44,7 +44,7 @@
                     onclick={() => ($balance += amount)}
                     class="touch-manipulation rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-green-400 active:bg-green-600 disabled:bg-neutral-600 disabled:text-neutral-400"
                   >
-                    +${amount}
+                    +₹{amount}
                   </button>
                 {/each}
               </div>
