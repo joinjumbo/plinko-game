@@ -26,9 +26,9 @@
     </div>
   </nav>
 
-  <div class="flex-1 px-5 pb-32">
-    <div class="mx-auto mt-5 max-w-xl min-w-[300px] drop-shadow-xl md:mt-10 lg:max-w-7xl">
-      <div class="flex flex-col-reverse overflow-hidden rounded-lg lg:w-full lg:flex-row">
+  <div class="flex-1 px-2 pb-32">
+    <div class="mx-auto mt-3 w-full max-w-none drop-shadow-xl">
+      <div class="flex flex-col-reverse overflow-hidden">
         <div class="flex-1">
           <Plinko />
         </div>

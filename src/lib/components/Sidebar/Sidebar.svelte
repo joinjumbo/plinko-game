@@ -121,10 +121,8 @@
 
 <!-- bet controls -->
 <div
-  class="fixed bottom-0 left-0 right-0 z-50 mx-2 mb-2 flex
-  w-auto flex-col gap-5 rounded-lg bg-[#333742] p-4 shadow-xl
-  sm:left-1/2 sm:right-auto sm:mx-4 sm:w-auto sm:max-w-[600px] sm:-translate-x-1/2
-  lg:static lg:left-auto lg:mx-0 lg:mb-0 lg:translate-x-0 lg:rounded-lg lg:bg-[#333742] lg:p-4 lg:shadow-none"
+  class="fixed bottom-0 left-0 right-0 z-50 mx-4 mb-4 flex
+  w-auto flex-col gap-4 rounded-lg bg-[#333742] p-4 shadow-xl"
   style="box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);"
 >
   <div class="flex gap-1 rounded-lg border-2 border-[#3D424E] bg-[#2C303B] p-1">
@@ -143,7 +141,7 @@
     {/each}
   </div>
 
-  <div>
+  <div class="flex flex-col gap-2">
     <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
     <Select
       id="riskLevel"
@@ -153,8 +151,8 @@
     />
   </div>
 
-  <div class="relative">
-    <!-- <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label> -->
+  <div class="relative flex flex-col gap-2">
+    <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label>
     <div class="flex items-end gap-2">
       <div class="relative w-1/2">
         <input
@@ -194,19 +192,26 @@
       >
         2×
       </button> -->
-      {#if betMode === BetMode.MANUAL}
-        <button
-          onclick={handleBetClick}
-          disabled={isDropBallDisabled}
-          class={twMerge(
-            'w-1/2 touch-manipulation rounded-md py-4 text-lg font-semibold text-slate-900 transition-colors',
-            'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
-            autoBetInterval !== null && 'bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600',
-          )}
-        >
+      <button
+        onclick={handleBetClick}
+        disabled={isDropBallDisabled}
+        class={twMerge(
+          'w-1/2 touch-manipulation rounded-md py-4 text-lg font-semibold text-slate-900 transition-colors',
+          betMode === BetMode.MANUAL
+            ? 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400'
+            : autoBetInterval !== null
+            ? 'bg-red-500 hover:bg-red-400 active:bg-red-600'
+            : 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
+        )}
+      >
+        {#if betMode === BetMode.MANUAL}
           Bet
-        </button>
-      {/if}
+        {:else if autoBetInterval !== null}
+          Stop
+        {:else}
+          Start
+        {/if}
+      </button>
     </div>
     {#if isBetAmountNegative}
       <p class="absolute text-xs leading-5 text-red-400">
@@ -217,7 +222,7 @@
     {/if}
   </div>
   {#if betMode === BetMode.AUTO}
-    <div>
+    <div class="flex flex-col gap-2">
       <div class="flex items-center gap-1">
         <label for="autoBetInput" class="text-sm font-medium text-slate-300">Number of Bets</label>
         <Popover.Root>

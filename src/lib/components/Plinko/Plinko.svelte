@@ -22,7 +22,7 @@
 
 <!-- game board -->
 <div class="relative">
-  <div class="mx-auto flex h-full flex-col px-4 pb-4" style:max-width={`${WIDTH}px`}>
+  <div class="mx-auto flex h-full flex-col px-2 pb-2" style:max-width="100%">
     <div class="relative w-full" style:aspect-ratio={`${WIDTH} / ${HEIGHT}`}>
       {#if $plinkoEngine === null}
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
