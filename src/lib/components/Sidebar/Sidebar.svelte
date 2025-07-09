@@ -121,7 +121,7 @@
 
 <!-- bet controls -->
 <div
-  class="fixed bottom-0 left-0 right-0 z-50 mx-4 mb-4 flex
+  class="fixed right-0 bottom-0 left-0 z-50 mx-4 mb-4 flex
   w-auto flex-col gap-4 rounded-lg bg-[#333742] p-4 shadow-xl"
   style="box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);"
 >
@@ -141,15 +141,67 @@
     {/each}
   </div>
 
-  <div class="flex flex-col gap-2">
-    <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
-    <Select
-      id="riskLevel"
-      bind:value={$riskLevel}
-      items={riskLevels}
-      disabled={hasOutstandingBalls || autoBetInterval !== null}
-    />
-  </div>
+  {#if betMode === BetMode.AUTO}
+    <div class="flex gap-4">
+      <div class="flex flex-1 flex-col gap-2">
+        <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
+        <Select
+          id="riskLevel"
+          bind:value={$riskLevel}
+          items={riskLevels}
+          disabled={hasOutstandingBalls || autoBetInterval !== null}
+        />
+      </div>
+      <div class="flex flex-1 flex-col gap-2">
+        <div class="flex items-center gap-1">
+          <label for="autoBetInput" class="text-sm font-medium text-slate-300">Number of Bets</label
+          >
+          <Popover.Root>
+            <Popover.Trigger class="p-1">
+              <Question class="text-slate-300" weight="bold" />
+            </Popover.Trigger>
+            <Popover.Content
+              class="z-30 max-w-lg rounded-md bg-white p-3 text-sm font-medium text-gray-950 drop-shadow-xl"
+            >
+              <p>Enter '0' for unlimited bets.</p>
+              <Popover.Arrow />
+            </Popover.Content>
+          </Popover.Root>
+        </div>
+        <div class="relative">
+          <input
+            id="autoBetInput"
+            value={autoBetInterval === null ? autoBetInput : autoBetsLeft ?? 0}
+            disabled={autoBetInterval !== null}
+            onfocusout={handleAutoBetInputFocusOut}
+            type="number"
+            min="0"
+            inputmode="numeric"
+            class={twMerge(
+              'w-full rounded-md border-2 border-slate-600 bg-slate-900 py-2 pr-8 pl-3 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
+              isAutoBetInputNegative && 'border-red-500 hover:border-red-400 focus:border-red-400',
+            )}
+          />
+          {#if autoBetInput === 0}
+            <Infinity class="absolute top-3 right-3 size-4 text-slate-400" weight="bold" />
+          {/if}
+        </div>
+        {#if isAutoBetInputNegative}
+          <p class="text-xs leading-5 text-red-400">This must be greater than or equal to 0.</p>
+        {/if}
+      </div>
+    </div>
+  {:else}
+    <div class="flex flex-col gap-2">
+      <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
+      <Select
+        id="riskLevel"
+        bind:value={$riskLevel}
+        items={riskLevels}
+        disabled={hasOutstandingBalls || autoBetInterval !== null}
+      />
+    </div>
+  {/if}
 
   <div class="relative flex flex-col gap-2">
     <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label>
@@ -200,8 +252,8 @@
           betMode === BetMode.MANUAL
             ? 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400'
             : autoBetInterval !== null
-            ? 'bg-red-500 hover:bg-red-400 active:bg-red-600'
-            : 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
+              ? 'bg-red-500 hover:bg-red-400 active:bg-red-600'
+              : 'bg-[#24BB3C] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
         )}
       >
         {#if betMode === BetMode.MANUAL}
@@ -221,43 +273,4 @@
       <p class="absolute text-xs leading-5 text-red-400">Can't bet more than your balance!</p>
     {/if}
   </div>
-  {#if betMode === BetMode.AUTO}
-    <div class="flex flex-col gap-2">
-      <div class="flex items-center gap-1">
-        <label for="autoBetInput" class="text-sm font-medium text-slate-300">Number of Bets</label>
-        <Popover.Root>
-          <Popover.Trigger class="p-1">
-            <Question class="text-slate-300" weight="bold" />
-          </Popover.Trigger>
-          <Popover.Content
-            class="z-30 max-w-lg rounded-md bg-white p-3 text-sm font-medium text-gray-950 drop-shadow-xl"
-          >
-            <p>Enter '0' for unlimited bets.</p>
-            <Popover.Arrow />
-          </Popover.Content>
-        </Popover.Root>
-      </div>
-      <div class="relative">
-        <input
-          id="autoBetInput"
-          value={autoBetInterval === null ? autoBetInput : autoBetsLeft ?? 0}
-          disabled={autoBetInterval !== null}
-          onfocusout={handleAutoBetInputFocusOut}
-          type="number"
-          min="0"
-          inputmode="numeric"
-          class={twMerge(
-            'w-full rounded-md border-2 border-slate-600 bg-slate-900 py-2 pr-8 pl-3 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
-            isAutoBetInputNegative && 'border-red-500 hover:border-red-400 focus:border-red-400',
-          )}
-        />
-        {#if autoBetInput === 0}
-          <Infinity class="absolute top-3 right-3 size-4 text-slate-400" weight="bold" />
-        {/if}
-      </div>
-      {#if isAutoBetInputNegative}
-        <p class="text-xs leading-5 text-red-400">This must be greater than or equal to 0.</p>
-      {/if}
-    </div>
-  {/if}
 </div>
