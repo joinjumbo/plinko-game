@@ -1,6 +1,6 @@
 <script lang="ts">
   import logo from '$lib/assets/logo.svg';
-  import Balance from '$lib/components/Balance.svelte';
+  import BalanceNew from '$lib/components/BalanceNew.svelte';
   import LiveStatsWindow from '$lib/components/LiveStatsWindow/LiveStatsWindow.svelte';
   import Plinko from '$lib/components/Plinko';
   import SettingsWindow from '$lib/components/SettingsWindow';
@@ -21,7 +21,7 @@
       <!-- <img src={logo} alt="logo" class="h-6 sm:h-7" /> -->
       <div class="flex w-full items-center justify-between">
         <img src={logo} alt="logo" class="h-6 sm:h-7" />
-        <Balance />
+        <BalanceNew />
       </div>
     </div>
   </nav>
