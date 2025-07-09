@@ -20,8 +20,9 @@
   };
 </script>
 
-<div class="relative bg-gray-900">
-  <div class="mx-auto flex h-full flex-col px-4 pb-4" style:max-width={`${WIDTH}px`}>
+<!-- game board -->
+<div class="relative">
+  <div class="mx-auto flex h-full flex-col px-2 pb-2" style:max-width="100%">
     <div class="relative w-full" style:aspect-ratio={`${WIDTH} / ${HEIGHT}`}>
       {#if $plinkoEngine === null}
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -33,8 +34,9 @@
       </canvas>
     </div>
     <BinsRow />
-  </div>
-  <div class="absolute top-1/2 right-[5%] -translate-y-1/2">
-    <LastWins />
+    <!-- jugaad positioning -->
+    <div class="mt-28 flex justify-center">
+      <LastWins />
+    </div>
   </div>
 </div>

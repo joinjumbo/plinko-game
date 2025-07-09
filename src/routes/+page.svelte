@@ -16,19 +16,19 @@
 <svelte:window onbeforeunload={writeBalanceToLocalStorage} />
 
 <div class="relative flex min-h-dvh w-full flex-col">
-  <nav class="sticky top-0 z-10 w-full bg-gray-700 px-5 drop-shadow-lg">
+  <nav class="sticky top-0 z-10 w-full px-5 drop-shadow-lg">
     <div class="mx-auto flex h-14 max-w-7xl items-center justify-between">
-      <img src={logo} alt="logo" class="h-6 sm:h-7" />
-      <div class="mx-auto">
+      <!-- <img src={logo} alt="logo" class="h-6 sm:h-7" /> -->
+      <div class="flex w-full items-center justify-between">
+        <img src={logo} alt="logo" class="h-6 sm:h-7" />
         <Balance />
       </div>
     </div>
   </nav>
 
-  <div class="flex-1 px-5">
-    <div class="mx-auto mt-5 max-w-xl min-w-[300px] drop-shadow-xl md:mt-10 lg:max-w-7xl">
-      <div class="flex flex-col-reverse overflow-hidden rounded-lg lg:w-full lg:flex-row">
-        <Sidebar />
+  <div class="flex-1 px-2 pt-8 pb-32">
+    <div class="mx-auto mt-8 w-full max-w-none drop-shadow-xl">
+      <div class="flex flex-col-reverse overflow-hidden">
         <div class="flex-1">
           <Plinko />
         </div>
@@ -36,10 +36,13 @@
     </div>
   </div>
 
-  <SettingsWindow />
+  <!-- Place Sidebar as sticky footer here -->
+  <Sidebar />
+
+  <!-- <SettingsWindow /> -->
   <LiveStatsWindow />
 
-  <footer class="px-5 pt-16 pb-4">
+  <!-- <footer class="px-5 pt-16 pb-4">
     <div class="mx-auto max-w-[40rem]">
       <div aria-hidden="true" class="h-[1px] bg-slate-700"></div>
       <div class="flex items-center justify-between p-2">
@@ -65,13 +68,14 @@
         </a>
       </div>
     </div>
-  </footer>
+  </footer> -->
 </div>
 
 <style lang="postcss">
   @reference "../app.css";
 
   :global(body) {
-    @apply bg-gray-800;
+    /* Radial gradient background: #272B34 at 0%, #181A1F at 100% */
+    background: radial-gradient(circle at 50% 40%, #272b34 0%, #181a1f 100%);
   }
 </style>

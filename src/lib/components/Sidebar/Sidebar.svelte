@@ -117,18 +117,23 @@
     { value: RiskLevel.MEDIUM, label: 'Medium' },
     { value: RiskLevel.HIGH, label: 'High' },
   ];
-  const rowCounts = rowCountOptions.map((value) => ({ value, label: value.toString() }));
 </script>
 
-<div class="flex flex-col gap-5 bg-slate-700 p-3 lg:max-w-80">
-  <div class="flex gap-1 rounded-full bg-slate-900 p-1">
+<!-- bet controls -->
+<div
+  class="fixed right-0 bottom-0 left-0 z-50 mx-4 mb-4 flex
+  w-auto flex-col gap-4 rounded-lg bg-[#333742] p-4 shadow-xl"
+  style="box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18);"
+>
+  <div class="flex gap-1 rounded-lg border-2 border-[#3D424E] bg-[#2C303B] p-1">
     {#each betModes as { value, label }}
       <button
         disabled={autoBetInterval !== null}
         onclick={() => (betMode = value)}
         class={twMerge(
-          'flex-1 rounded-full py-2 text-sm font-medium text-white transition hover:not-disabled:bg-slate-600 active:not-disabled:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
-          betMode === value && 'bg-slate-600',
+          'flex-1 rounded-lg py-2 text-sm font-medium text-white transition hover:not-disabled:bg-slate-600 active:not-disabled:bg-slate-500 disabled:cursor-not-allowed disabled:opacity-50',
+          // betMode === value && 'bg-slate-600',
+          betMode === value && 'bg-[#1ACB37] text-black',
         )}
       >
         {label}
@@ -136,10 +141,72 @@
     {/each}
   </div>
 
-  <div class="relative">
+  {#if betMode === BetMode.AUTO}
+    <div class="flex gap-4">
+      <div class="flex flex-1 flex-col gap-2">
+        <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
+        <Select
+          id="riskLevel"
+          bind:value={$riskLevel}
+          items={riskLevels}
+          disabled={hasOutstandingBalls || autoBetInterval !== null}
+        />
+      </div>
+      <div class="flex flex-1 flex-col gap-2">
+        <div class="flex items-center gap-1">
+          <label for="autoBetInput" class="text-sm font-medium text-slate-300">Number of Bets</label
+          >
+          <Popover.Root>
+            <Popover.Trigger class="p-1">
+              <Question class="text-slate-300" weight="bold" />
+            </Popover.Trigger>
+            <Popover.Content
+              class="z-30 max-w-lg rounded-md bg-white p-3 text-sm font-medium text-gray-950 drop-shadow-xl"
+            >
+              <p>Enter '0' for unlimited bets.</p>
+              <Popover.Arrow />
+            </Popover.Content>
+          </Popover.Root>
+        </div>
+        <div class="relative">
+          <input
+            id="autoBetInput"
+            value={autoBetInterval === null ? autoBetInput : autoBetsLeft ?? 0}
+            disabled={autoBetInterval !== null}
+            onfocusout={handleAutoBetInputFocusOut}
+            type="number"
+            min="0"
+            inputmode="numeric"
+            class={twMerge(
+              'w-full rounded-md border-2 border-slate-600 bg-slate-900 py-2 pr-8 pl-3 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
+              isAutoBetInputNegative && 'border-red-500 hover:border-red-400 focus:border-red-400',
+            )}
+          />
+          {#if autoBetInput === 0}
+            <Infinity class="absolute top-3 right-3 size-4 text-slate-400" weight="bold" />
+          {/if}
+        </div>
+        {#if isAutoBetInputNegative}
+          <p class="text-xs leading-5 text-red-400">This must be greater than or equal to 0.</p>
+        {/if}
+      </div>
+    </div>
+  {:else}
+    <div class="flex flex-col gap-2">
+      <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk Level</label>
+      <Select
+        id="riskLevel"
+        bind:value={$riskLevel}
+        items={riskLevels}
+        disabled={hasOutstandingBalls || autoBetInterval !== null}
+      />
+    </div>
+  {/if}
+
+  <div class="relative flex flex-col gap-2">
     <label for="betAmount" class="text-sm font-medium text-slate-300">Bet Amount</label>
-    <div class="flex">
-      <div class="relative flex-1">
+    <div class="flex items-end gap-2">
+      <div class="relative w-1/2">
         <input
           id="betAmount"
           value={$betAmount}
@@ -150,14 +217,16 @@
           step="0.01"
           inputmode="decimal"
           class={twMerge(
-            'w-full rounded-l-md border-2 border-slate-600 bg-slate-900 py-2 pr-2 pl-7 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden  disabled:cursor-not-allowed disabled:opacity-50',
+            'w-full rounded-lg border-2 border-slate-600 bg-slate-900 py-4 pr-2 pl-7 text-lg text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden  disabled:cursor-not-allowed disabled:opacity-50',
             (isBetAmountNegative || isBetExceedBalance) &&
               'border-red-500 hover:not-disabled:border-red-400 focus:border-red-400',
           )}
         />
-        <div class="absolute top-2 left-3 text-slate-500 select-none" aria-hidden="true">$</div>
+        <div class="absolute top-4 left-3 text-lg text-slate-500 select-none" aria-hidden="true">
+          ₹
+        </div>
       </div>
-      <button
+      <!-- <button
         disabled={autoBetInterval !== null}
         onclick={() => {
           $betAmount = parseFloat(($betAmount / 2).toFixed(2));
@@ -174,6 +243,26 @@
         class="relative touch-manipulation rounded-r-md bg-slate-600 px-4 text-sm font-bold text-white transition-colors after:absolute after:left-0 after:inline-block after:h-1/2 after:w-[2px] after:bg-slate-800 after:content-[''] hover:not-disabled:bg-slate-500 active:not-disabled:bg-slate-400 disabled:cursor-not-allowed disabled:opacity-50"
       >
         2×
+      </button> -->
+      <button
+        onclick={handleBetClick}
+        disabled={isDropBallDisabled}
+        class={twMerge(
+          'w-1/2 touch-manipulation rounded-md py-4 text-lg font-semibold text-slate-900 transition-colors',
+          betMode === BetMode.MANUAL
+            ? 'bg-[#1ACB37] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400'
+            : autoBetInterval !== null
+              ? 'bg-[#FF6565] hover:bg-[#FF7575] active:bg-[#FF5555]'
+              : 'bg-[#1ACB37] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400',
+        )}
+      >
+        {#if betMode === BetMode.MANUAL}
+          Bet
+        {:else if autoBetInterval !== null}
+          Stop
+        {:else}
+          Start
+        {/if}
       </button>
     </div>
     {#if isBetAmountNegative}
@@ -183,146 +272,5 @@
     {:else if isBetExceedBalance}
       <p class="absolute text-xs leading-5 text-red-400">Can't bet more than your balance!</p>
     {/if}
-  </div>
-
-  <div>
-    <label for="riskLevel" class="text-sm font-medium text-slate-300">Risk</label>
-    <Select
-      id="riskLevel"
-      bind:value={$riskLevel}
-      items={riskLevels}
-      disabled={hasOutstandingBalls || autoBetInterval !== null}
-    />
-  </div>
-
-  <div>
-    <label for="rowCount" class="text-sm font-medium text-slate-300">Rows</label>
-    <Select
-      id="rowCount"
-      bind:value={$rowCount}
-      items={rowCounts}
-      disabled={hasOutstandingBalls || autoBetInterval !== null}
-    />
-  </div>
-
-  {#if betMode === BetMode.AUTO}
-    <div>
-      <div class="flex items-center gap-1">
-        <label for="autoBetInput" class="text-sm font-medium text-slate-300">Number of Bets</label>
-        <Popover.Root>
-          <Popover.Trigger class="p-1">
-            <Question class="text-slate-300" weight="bold" />
-          </Popover.Trigger>
-          <Popover.Content
-            class="z-30 max-w-lg rounded-md bg-white p-3 text-sm font-medium text-gray-950 drop-shadow-xl"
-          >
-            <p>Enter '0' for unlimited bets.</p>
-            <Popover.Arrow />
-          </Popover.Content>
-        </Popover.Root>
-      </div>
-      <div class="relative">
-        <input
-          id="autoBetInput"
-          value={autoBetInterval === null ? autoBetInput : autoBetsLeft ?? 0}
-          disabled={autoBetInterval !== null}
-          onfocusout={handleAutoBetInputFocusOut}
-          type="number"
-          min="0"
-          inputmode="numeric"
-          class={twMerge(
-            'w-full rounded-md border-2 border-slate-600 bg-slate-900 py-2 pr-8 pl-3 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
-            isAutoBetInputNegative && 'border-red-500 hover:border-red-400 focus:border-red-400',
-          )}
-        />
-        {#if autoBetInput === 0}
-          <Infinity class="absolute top-3 right-3 size-4 text-slate-400" weight="bold" />
-        {/if}
-      </div>
-      {#if isAutoBetInputNegative}
-        <p class="text-xs leading-5 text-red-400">This must be greater than or equal to 0.</p>
-      {/if}
-    </div>
-  {/if}
-
-  <button
-    onclick={handleBetClick}
-    disabled={isDropBallDisabled}
-    class={twMerge(
-      'touch-manipulation rounded-md bg-green-500 py-3 font-semibold text-slate-900 transition-colors hover:bg-green-400 active:bg-green-600 disabled:bg-neutral-600 disabled:text-neutral-400',
-      autoBetInterval !== null && 'bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600',
-    )}
-  >
-    {#if betMode === BetMode.MANUAL}
-      Drop Ball
-    {:else if autoBetInterval === null}
-      Start Autobet
-    {:else}
-      Stop Autobet
-    {/if}
-  </button>
-
-  <div class="mt-auto pt-5">
-    <div class="flex items-center gap-4 border-t border-slate-600 pt-3">
-      <Tooltip.Provider delayDuration={0} disableCloseOnTriggerClick>
-        <!-- Settings Button -->
-        <Tooltip.Root>
-          <Tooltip.Trigger
-            onclick={() => ($isGameSettingsOpen = !$isGameSettingsOpen)}
-            class={twMerge(
-              'rounded-full p-2 text-slate-300 transition hover:bg-slate-600 active:bg-slate-500',
-              $isGameSettingsOpen && 'text-slate-100',
-            )}
-          >
-            <GearSix class="size-6" weight="fill" />
-          </Tooltip.Trigger>
-          <Tooltip.Content
-            forceMount
-            sideOffset={4}
-            class="z-30 max-w-lg rounded-md bg-white p-3 text-sm font-medium text-gray-950 drop-shadow-xl"
-          >
-            {#snippet child({ wrapperProps, props, open })}
-              {#if open}
-                <div {...wrapperProps}>
-                  <div {...props} transition:flyAndScale>
-                    <Tooltip.Arrow class="text-white" />
-                    <p>{$isGameSettingsOpen ? 'Close' : 'Open'} Game Settings</p>
-                  </div>
-                </div>
-              {/if}
-            {/snippet}
-          </Tooltip.Content>
-        </Tooltip.Root>
-
-        <!-- Live Stats Button -->
-        <Tooltip.Root>
-          <Tooltip.Trigger
-            onclick={() => ($isLiveStatsOpen = !$isLiveStatsOpen)}
-            class={twMerge(
-              'rounded-full p-2 text-slate-300 transition hover:bg-slate-600 active:bg-slate-500',
-              $isLiveStatsOpen && 'text-slate-100',
-            )}
-          >
-            <ChartLine class="size-6" weight="bold" />
-          </Tooltip.Trigger>
-          <Tooltip.Content
-            forceMount
-            sideOffset={4}
-            class="z-30 max-w-lg rounded-md bg-white p-3 text-sm font-medium text-gray-950 drop-shadow-xl"
-          >
-            {#snippet child({ wrapperProps, props, open })}
-              {#if open}
-                <div {...wrapperProps}>
-                  <div {...props} transition:flyAndScale>
-                    <Tooltip.Arrow class="text-white" />
-                    <p>{$isLiveStatsOpen ? 'Close' : 'Open'} Live Stats</p>
-                  </div>
-                </div>
-              {/if}
-            {/snippet}
-          </Tooltip.Content>
-        </Tooltip.Root>
-      </Tooltip.Provider>
-    </div>
   </div>
 </div>

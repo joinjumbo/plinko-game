@@ -9,22 +9,16 @@
     winCount?: number;
   };
 
-  let { winCount = 4 }: Props = $props();
+  let { winCount = 6 }: Props = $props();
 
   let lastWins = $derived($winRecords.slice(-winCount).toReversed());
 </script>
 
-<!-- Clamps in mobile:
-      - Width: From 1.5rem at 340px viewport width to 2rem at 620px viewport width
-      - Font size: From 8px at 340px viewport width to 10px at 620px viewport width
- -->
-<div
-  class="flex w-[clamp(1.5rem,0.893rem+2.857vw,2rem)] flex-col overflow-hidden rounded-xs text-[clamp(8px,5.568px+0.714vw,10px)] md:rounded-md lg:w-12 lg:text-sm"
-  style:aspect-ratio={`1 / ${winCount}`}
->
-  {#each lastWins as { binIndex, rowCount, payout: { multiplier } }}
+<!-- LastWins with smaller size and adjusted font -->
+<div class="flex flex-row gap-1 overflow-hidden">
+  {#each lastWins as { binIndex, rowCount, payout: { multiplier } }, index}
     <div
-      class="flex aspect-square items-center justify-center font-bold text-gray-950"
+      class="flex items-center justify-center px-2 py-1.5 text-xs font-bold text-gray-950 {index === 0 ? 'rounded-l-md' : ''} {index === lastWins.length - 1 ? 'rounded-r-md' : ''}"
       style:background-color={binColorsByRowCount[rowCount].background[binIndex]}
     >
       {multiplier}{multiplier < 100 ? '×' : ''}
