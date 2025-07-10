@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { balance } from '$lib/stores/game';
+  import { balance, cwBalance } from '$lib/stores/game';
   import { flyAndScale } from '$lib/utils/transitions';
   import { Popover } from 'bits-ui';
 
@@ -11,8 +11,7 @@
   }
 
   const addMoneyAmounts = [100, 500, 1000];
-  let mockBalance = 1310;
-  let mockBalanceFormatted = $derived(abbreviate(mockBalance));
+  let cwBalanceFormatted = $derived(abbreviate($cwBalance));
 </script>
 
 <Popover.Root>
@@ -34,7 +33,7 @@
         <img src="/cw_icon.png" alt="CW Icon" width="10" height="10" />
       </span>
       <span class="text-[10px] leading-none font-bold whitespace-nowrap text-white"
-        >{mockBalanceFormatted}</span
+        >{cwBalanceFormatted}</span
       >
     </div>
   </Popover.Trigger>

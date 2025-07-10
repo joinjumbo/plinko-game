@@ -60,8 +60,9 @@
         <div
           use:initAnimation
           class="flex min-w-0 flex-1 items-center justify-center rounded-xs py-2 text-[clamp(8px,4.784px+0.87vw,10px)] font-bold text-gray-950 shadow-[0_2px_var(--shadow-color)] lg:rounded-md lg:text-[clamp(10px,-16.944px+2.632vw,12px)] lg:shadow-[0_3px_var(--shadow-color)]"
-          style:background-color={binColorsByRowCount[$rowCount].background[binIndex]}
-          style:--shadow-color={binColorsByRowCount[$rowCount].shadow[binIndex]}
+          style:background-color={binIndex % 2 === 0 ? '#22c55e' : '#3b82f6'}
+          style:--shadow-color={binIndex % 2 === 0 ? '#16a34a' : '#2563eb'}
+          title={binIndex % 2 === 0 ? 'CW (Cash Withdrawal)' : 'GT (Game Tokens)'}
         >
           {payout}{payout < 100 ? '×' : ''}
         </div>
