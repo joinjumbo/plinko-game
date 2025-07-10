@@ -22,29 +22,27 @@
   let mockBalanceFormatted = $derived(abbreviate(mockBalance));
 </script>
 
-<div class="flex flex-col gap-1 rounded-lg border border-white/5 px-2 py-1.5 shadow-sm">
-  <div class="flex flex-row items-center gap-1">
-    <span class="flex h-3 w-3 items-center justify-center">
-      <!-- Blue hexagon icon -->
-      <svg width="10" height="10" viewBox="0 0 40 40" fill="none">
-        <polygon
-          points="20,3 37,12 37,28 20,37 3,28 3,12"
-          fill="#1DE6FF"
-          stroke="#0BC2E6"
-          stroke-width="2"
-        />
-        <circle cx="20" cy="20" r="7" fill="#0BC2E6" opacity="0.7" />
-        <circle cx="20" cy="20" r="2.5" fill="#fff" opacity="0.8" />
-      </svg>
-    </span>
-    <span class="mr-1 min-w-[1.5rem] text-[10px] leading-none font-bold text-white drop-shadow-sm"
-      >{abbreviate($balance)}</span
-    >
-    <Popover.Root>
-      <Popover.Trigger
-        class="ml-0.5 flex h-4 w-4 cursor-pointer items-center justify-center rounded-md border-none bg-[#1ACB37] text-[10px] font-bold text-white shadow-sm transition-colors hover:bg-[#17b32f]"
-        >+</Popover.Trigger
+<Popover.Root>
+  <Popover.Trigger
+    class="flex h-8 flex-col gap-0 rounded-lg border border-white/10 px-1.5 py-1.5 cursor-pointer hover:bg-white/5 transition-colors"
+  >
+    <div class="flex flex-row items-center gap-1">
+      <span class="flex h-2.5 w-2.5 items-center justify-center">
+        <!-- Blue hexagon icon -->
+        <img src="/gt_icon.png" alt="GT Icon" width="10" height="10" />
+      </span>
+      <span class="mr-0 text-[10px] leading-none font-semibold text-white"
+        >{abbreviate($balance)}</span
       >
+    </div>
+    <div class="flex flex-row items-center gap-1">
+      <span class="flex h-2.5 w-2.5 items-center justify-center">
+        <!-- Cash stack icon -->
+        <img src="/cw_icon.png" alt="GT Icon" width="10" height="10" />
+      </span>
+      <span class=" text-[10px] leading-none font-semibold text-white">{mockBalanceFormatted}</span>
+    </div>
+  </Popover.Trigger>
       <Popover.Content
         forceMount
         sideOffset={8}
@@ -70,31 +68,4 @@
           {/if}
         {/snippet}
       </Popover.Content>
-    </Popover.Root>
-  </div>
-  <div class="flex flex-row items-center gap-1">
-    <span class="flex h-3 w-3 items-center justify-center">
-      <!-- Cash stack icon -->
-      <svg width="10" height="10" viewBox="0 0 32 32" fill="none">
-        <rect
-          x="2"
-          y="10"
-          width="28"
-          height="12"
-          rx="3"
-          fill="#1ACB37"
-          stroke="#0B8A24"
-          stroke-width="2"
-        />
-        <rect x="8" y="14" width="16" height="4" rx="1" fill="#fff" opacity="0.7" />
-        <rect x="14" y="10" width="4" height="12" rx="1" fill="#FFD600" opacity="0.7" />
-        <rect x="6" y="22" width="20" height="2" rx="1" fill="#0B8A24" opacity="0.2" />
-        <rect x="6" y="8" width="20" height="2" rx="1" fill="#0B8A24" opacity="0.2" />
-        <rect x="12" y="16" width="8" height="2" rx="1" fill="#fff" opacity="0.5" />
-      </svg>
-    </span>
-    <span class="min-w-[1.5rem] text-[10px] leading-none font-bold text-white drop-shadow-sm"
-      >{mockBalanceFormatted}</span
-    >
-  </div>
-</div>
+</Popover.Root>
