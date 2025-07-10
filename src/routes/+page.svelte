@@ -17,23 +17,23 @@
 
 <div class="relative flex min-h-dvh w-full flex-col">
   <nav class="sticky top-0 z-10 w-full px-5 drop-shadow-lg">
-    <div class="mx-auto mt-3 flex h-10 items-center justify-between">
+    <div class="mx-auto mt-3 flex h-9 items-center justify-between">
       <div class="flex items-center gap-2">
         <button
-          aria-label="Open menu"
-          class="flex h-8 w-8 items-center justify-center rounded-lg border-1 border-white/10 text-white transition-colors hover:bg-red-600"
+          aria-label="Close"
+          class="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 text-white text-sm transition-colors hover:bg-red-600"
         >
           ✕
         </button>
-        <img src={logo} alt="logo" class="h-8" />
+        <img src={logo} alt="logo" class="h-7" />
       </div>
       <div class="flex items-center gap-3">
         <BalanceNew />
         <button
           aria-label="Open menu"
-          class="flex h-8 w-8 items-center justify-center rounded-lg border-1 border-white/10 text-white transition-colors hover:bg-red-600"
+          class="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 text-white transition-colors hover:bg-red-600"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
             <circle cx="8" cy="3" r="1.5" />
             <circle cx="8" cy="8" r="1.5" />
             <circle cx="8" cy="13" r="1.5" />
