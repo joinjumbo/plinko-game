@@ -18,23 +18,23 @@
 
 <Popover.Root>
   <Popover.Trigger
-    class="flex cursor-pointer flex-col gap-0.5 rounded-lg border border-white/10 px-2 py-1.5 transition-colors hover:bg-white/5"
+    class="flex cursor-pointer flex-col justify-center gap-0.5 rounded-lg border border-white/10 px-2.5 py-1 transition-colors hover:bg-white/5 min-h-[32px]"
   >
-    <div class="flex flex-row items-center gap-1.5">
-      <span class="flex h-3 w-3 items-center justify-center">
+    <div class="flex flex-row items-center gap-2">
+      <span class="flex h-3 w-3 items-center justify-center shrink-0">
         <!-- Blue hexagon icon -->
         <img src="/gt_icon.png" alt="GT Icon" width="10" height="10" />
       </span>
-      <span class="text-[10px] leading-tight font-semibold text-white"
+      <span class="text-[10px] leading-none font-bold text-white whitespace-nowrap"
         >{abbreviate($balance)}</span
       >
     </div>
-    <div class="flex flex-row items-center gap-1.5">
-      <span class="flex h-3 w-3 items-center justify-center">
+    <div class="flex flex-row items-center gap-2">
+      <span class="flex h-3 w-3 items-center justify-center shrink-0">
         <!-- Cash stack icon -->
         <img src="/cw_icon.png" alt="CW Icon" width="10" height="10" />
       </span>
-      <span class="text-[10px] leading-tight font-semibold text-white">{mockBalanceFormatted}</span>
+      <span class="text-[10px] leading-none font-bold text-white whitespace-nowrap">{mockBalanceFormatted}</span>
     </div>
   </Popover.Trigger>
   <Popover.Content
