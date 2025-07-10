@@ -4,6 +4,7 @@
   import LiveStatsWindow from '$lib/components/LiveStatsWindow/LiveStatsWindow.svelte';
   import Plinko from '$lib/components/Plinko';
   import SettingsWindow from '$lib/components/SettingsWindow';
+  import LastWins from '$lib/components/Plinko/LastWins.svelte';
   import Sidebar from '$lib/components/Sidebar';
   import { setBalanceFromLocalStorage, writeBalanceToLocalStorage } from '$lib/utils/game';
 
@@ -54,6 +55,12 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- LastWins positioned above Sidebar for mobile -->
+  <!-- <div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-40 mb-4"> -->
+  <div class="fixed bottom-72 left-1/2 z-40 mb-4 -translate-x-1/2">
+    <LastWins />
   </div>
 
   <!-- Place Sidebar as sticky footer here -->
