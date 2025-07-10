@@ -6,7 +6,6 @@
   import SettingsWindow from '$lib/components/SettingsWindow';
   import Sidebar from '$lib/components/Sidebar';
   import { setBalanceFromLocalStorage, writeBalanceToLocalStorage } from '$lib/utils/game';
-  import GitHubLogo from 'phosphor-svelte/lib/GithubLogo';
 
   $effect(() => {
     setBalanceFromLocalStorage();
@@ -21,13 +20,13 @@
       <div class="flex items-center gap-2">
         <button
           aria-label="Close"
-          class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white text-sm transition-colors hover:bg-red-600"
+          class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-sm text-white transition-colors hover:bg-red-600"
         >
           ✕
         </button>
-        <img src={logo} alt="logo" class="h-8" />
+        <img src={logo} alt="logo" class="h-7" />
       </div>
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2">
         <BalanceNew />
         <button
           aria-label="Open menu"
