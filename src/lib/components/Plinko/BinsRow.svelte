@@ -59,11 +59,21 @@
          -->
         <div
           use:initAnimation
-          class="flex min-w-0 flex-1 items-center justify-center rounded-xs py-2 text-[clamp(8px,4.784px+0.87vw,10px)] font-bold text-gray-950 shadow-[0_2px_var(--shadow-color)] lg:rounded-md lg:text-[clamp(10px,-16.944px+2.632vw,12px)] lg:shadow-[0_3px_var(--shadow-color)]"
-          style:background-color={binColorsByRowCount[$rowCount].background[binIndex]}
-          style:--shadow-color={binColorsByRowCount[$rowCount].shadow[binIndex]}
+          class="relative flex min-w-0 flex-1 items-center justify-center rounded-xs py-2 text-[clamp(8px,4.784px+0.87vw,10px)] font-bold text-gray-950 shadow-[0_2px_var(--shadow-color)] lg:rounded-md lg:text-[clamp(10px,-16.944px+2.632vw,12px)] lg:shadow-[0_3px_var(--shadow-color)] overflow-hidden"
+          style:background-color={binIndex % 2 === 0 ? '#39C988' : '#B1F0FF'}
+          style:--shadow-color={binIndex % 2 === 0 ? '#2da768' : '#8de3ff'}
+          title={binIndex % 2 === 0 ? 'CW (Cash Withdrawal)' : 'GT (Game Tokens)'}
         >
-          {payout}{payout < 100 ? '×' : ''}
+          <!-- Original color strip at top (3px) -->
+          <div 
+            class="absolute top-0 left-0 right-0 h-[3px] rounded-t-xs lg:rounded-t-md"
+            style:background-color={binColorsByRowCount[$rowCount].background[binIndex]}
+          ></div>
+          
+          <!-- Payout text -->
+          <span class="relative z-10 mt-1">
+            {payout}{payout < 100 ? '×' : ''}
+          </span>
         </div>
       {/each}
     </div>

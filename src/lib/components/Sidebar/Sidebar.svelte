@@ -178,12 +178,12 @@
             min="0"
             inputmode="numeric"
             class={twMerge(
-              'w-full rounded-md border-2 border-slate-600 bg-slate-900 py-2 pr-8 pl-3 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
+              'w-full rounded-md border-2 border-slate-600 bg-slate-900 py-3 pr-8 pl-3 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
               isAutoBetInputNegative && 'border-red-500 hover:border-red-400 focus:border-red-400',
             )}
           />
           {#if autoBetInput === 0}
-            <Infinity class="absolute top-3 right-3 size-4 text-slate-400" weight="bold" />
+            <Infinity class="absolute top-3.5 right-3 size-4 text-slate-400" weight="bold" />
           {/if}
         </div>
         {#if isAutoBetInputNegative}
@@ -217,12 +217,12 @@
           step="0.01"
           inputmode="decimal"
           class={twMerge(
-            'w-full rounded-lg border-2 border-slate-600 bg-slate-900 py-4 pr-2 pl-7 text-lg text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden  disabled:cursor-not-allowed disabled:opacity-50',
+            'w-full rounded-lg border-2 border-slate-600 bg-slate-900 py-3 pr-2 pl-7 text-sm text-white transition-colors hover:cursor-pointer hover:not-disabled:border-slate-500 focus:border-slate-500 focus:outline-hidden  disabled:cursor-not-allowed disabled:opacity-50',
             (isBetAmountNegative || isBetExceedBalance) &&
               'border-red-500 hover:not-disabled:border-red-400 focus:border-red-400',
           )}
         />
-        <div class="absolute top-4 left-3 text-lg text-slate-500 select-none" aria-hidden="true">
+        <div class="absolute top-3.5 left-3 text-sm text-slate-500 select-none" aria-hidden="true">
           ₹
         </div>
       </div>
@@ -248,7 +248,7 @@
         onclick={handleBetClick}
         disabled={isDropBallDisabled}
         class={twMerge(
-          'w-1/2 touch-manipulation rounded-md py-4 text-lg font-semibold text-slate-900 transition-colors',
+          'w-1/2 touch-manipulation rounded-md py-3 text-sm font-semibold text-slate-900 transition-colors',
           betMode === BetMode.MANUAL
             ? 'bg-[#1ACB37] hover:bg-[#30D44A] active:bg-[#1DAA34] disabled:bg-[#52525B] disabled:text-neutral-400'
             : autoBetInterval !== null

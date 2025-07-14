@@ -56,4 +56,8 @@ export type WinRecord = {
    * Payout value minus the bet amount.
    */
   profit: number;
+  /**
+   * Currency type earned (GT for Game Tokens, CW for Cash Withdrawal).
+   */
+  currencyType?: 'GT' | 'CW';
 };

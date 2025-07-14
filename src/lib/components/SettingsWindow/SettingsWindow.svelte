@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { DEFAULT_BALANCE } from '$lib/constants/game';
   import { balance } from '$lib/stores/game';
   import { isGameSettingsOpen } from '$lib/stores/layout';
   import { isAnimationOn } from '$lib/stores/settings';
@@ -32,7 +31,7 @@
       </div>
 
       <button
-        onclick={() => ($balance = DEFAULT_BALANCE)}
+        onclick={() => ($balance = 200)}
         class="touch-manipulation self-start rounded-md bg-red-500 px-3 py-2 text-sm text-white transition-colors hover:bg-red-400 active:bg-red-600"
       >
         Reset Balance

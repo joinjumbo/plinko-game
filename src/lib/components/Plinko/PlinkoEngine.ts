@@ -5,6 +5,7 @@ import {
   riskLevel,
   betAmount,
   balance,
+  cwBalance,
   betAmountOfExistingBalls,
   totalProfitHistory,
 } from '$lib/stores/game';
@@ -259,6 +260,9 @@ class PlinkoEngine {
       const multiplier = binPayouts[this.rowCount][this.riskLevel][binIndex];
       const payoutValue = betAmount * multiplier;
       const profit = payoutValue - betAmount;
+      
+      // Determine currency type based on bin index (even = CW, odd = GT)
+      const currencyType = binIndex % 2 === 0 ? 'CW' : 'GT';
 
       winRecords.update((records) => [
         ...records,
@@ -272,13 +276,20 @@ class PlinkoEngine {
             value: payoutValue,
           },
           profit,
+          currencyType, // Add currency type to win record
         },
       ]);
       totalProfitHistory.update((history) => {
         const lastTotalProfit = history.slice(-1)[0];
         return [...history, lastTotalProfit + profit];
       });
-      balance.update((balance) => balance + payoutValue);
+      
+      // Award to appropriate currency based on bin
+      if (currencyType === 'CW') {
+        cwBalance.update((balance) => balance + payoutValue);
+      } else {
+        balance.update((balance) => balance + payoutValue);
+      }
     }
 
     Matter.Composite.remove(this.engine.world, ball);

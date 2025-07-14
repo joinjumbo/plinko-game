@@ -1,12 +1,12 @@
 <script lang="ts">
   import logo from '$lib/assets/logo.svg';
-  import Balance from '$lib/components/Balance.svelte';
+  import BalanceNew from '$lib/components/BalanceNew.svelte';
   import LiveStatsWindow from '$lib/components/LiveStatsWindow/LiveStatsWindow.svelte';
   import Plinko from '$lib/components/Plinko';
   import SettingsWindow from '$lib/components/SettingsWindow';
+  import LastWins from '$lib/components/Plinko/LastWins.svelte';
   import Sidebar from '$lib/components/Sidebar';
   import { setBalanceFromLocalStorage, writeBalanceToLocalStorage } from '$lib/utils/game';
-  import GitHubLogo from 'phosphor-svelte/lib/GithubLogo';
 
   $effect(() => {
     setBalanceFromLocalStorage();
@@ -17,12 +17,33 @@
 
 <div class="relative flex min-h-dvh w-full flex-col">
   <nav class="sticky top-0 z-10 w-full px-5 drop-shadow-lg">
-    <div class="mx-auto flex h-14 max-w-7xl items-center justify-between">
-      <!-- <img src={logo} alt="logo" class="h-6 sm:h-7" /> -->
-      <div class="flex w-full items-center justify-between">
-        <img src={logo} alt="logo" class="h-6 sm:h-7" />
-        <Balance />
+    <div class="mx-auto mt-3 flex h-10 items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button
+          aria-label="Close"
+          class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-sm text-white transition-colors hover:bg-red-600"
+        >
+          ✕
+        </button>
+        <img src={logo} alt="logo" class="h-7" />
       </div>
+      <div class="flex items-center gap-2">
+        <BalanceNew />
+        <button
+          aria-label="Open menu"
+          class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white transition-colors hover:bg-red-600"
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+            <circle cx="8" cy="3" r="1.5" />
+            <circle cx="8" cy="8" r="1.5" />
+            <circle cx="8" cy="13" r="1.5" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- <div class="flex w-full items-center justify-between"> -->
+
+      <!-- </div> -->
     </div>
   </nav>
 
@@ -34,6 +55,12 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- LastWins positioned above Sidebar for mobile -->
+  <!-- <div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-40 mb-4"> -->
+  <div class="fixed bottom-72 left-1/2 z-40 mb-4 -translate-x-1/2">
+    <LastWins />
   </div>
 
   <!-- Place Sidebar as sticky footer here -->
