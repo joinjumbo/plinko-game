@@ -64,14 +64,14 @@
           style:--shadow-color={binIndex % 2 === 0 ? '#2da768' : '#8de3ff'}
           title={binIndex % 2 === 0 ? 'CW (Cash Withdrawal)' : 'GT (Game Tokens)'}
         >
-          <!-- Original color strip at top -->
+          <!-- Original color strip at top (3px) -->
           <div 
-            class="absolute top-0 left-0 right-0 h-0.5 rounded-t-xs lg:rounded-t-md"
+            class="absolute top-0 left-0 right-0 h-[3px] rounded-t-xs lg:rounded-t-md"
             style:background-color={binColorsByRowCount[$rowCount].background[binIndex]}
           ></div>
           
           <!-- Payout text -->
-          <span class="relative z-10">
+          <span class="relative z-10 mt-1">
             {payout}{payout < 100 ? '×' : ''}
           </span>
         </div>
